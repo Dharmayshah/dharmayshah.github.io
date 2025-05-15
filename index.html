@@ -9,7 +9,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            padding: 3.5rem 0 0 0;
+            padding: 0;
             background: #121212;
             color: #ffffff;
             overflow-x: hidden;
@@ -36,7 +36,6 @@
             background: #1c1c1c;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
             z-index: 1000;
-            position: relative;
         }
         nav ul {
             display: flex;
@@ -150,83 +149,14 @@
             font-size: 1rem;
         }
         @media (max-width: 768px) {
-            body {
-                padding-top: 4.5rem;
-            }
-            header {
-                padding: 3rem 1rem;
-            }
             header h1 {
                 font-size: 2.5rem;
             }
             header p {
                 font-size: 1.2rem;
             }
-            nav {
-                padding: 0.5rem 1rem;
-            }
-            .hamburger {
-                display: flex;
-            }
-            nav ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background: #1c1c1c;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-                padding: 1rem 0;
-            }
-            nav.nav-active ul {
-                display: flex;
-            }
             nav ul li {
-                margin: 0.8rem 0;
-                text-align: center;
-            }
-            section {
-                padding: 2rem 1rem;
-            }
-            h2 {
-                font-size: 2rem;
-            }
-            p {
-                font-size: 1rem;
-            }
-            .project-card, .event-card {
-                width: 90% !important;
-                margin-right: 0 !important;
-                margin-left: 0 !important;
-                margin-bottom: 1.5rem;
-            }
-            .skills-icons img {
-                height: 80px;
-                margin: 10px;
-            }
-            .cert-icons img {
-                height: 100px;
-                margin: 15px;
-            }
-            dialog {
-                max-width: 90%;
-                max-height: 90%;
-                padding: 1.5rem;
-            }
-            .close-btn {
-                top: 10px;
-                right: 15px;
-                font-size: 24px;
-            }
-            #projects .container > div,
-            #events .container > div {
-                flex-direction: column;
-                align-items: center;
-            }
-            #about .container img {
-                width: 120px !important;
-                height: 120px !important;
+                margin: 0 0.8rem;
             }
         }
         dialog::backdrop {
@@ -274,46 +204,6 @@
                 margin-right: 0 !important;
             }
         }
-
-        /* Hamburger Menu Styles */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 2rem;
-            height: 2rem;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 1001;
-            position: absolute;
-            top: 50%;
-            right: 1.5rem;
-            transform: translateY(-50%);
-        }
-
-        .hamburger span {
-            width: 2rem;
-            height: 0.25rem;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            transition: all 0.3s linear;
-        }
-
-        /* Styles for when the mobile menu is active (toggled by JS) */
-        nav.nav-active .hamburger span:nth-child(1) {
-            transform: rotate(45deg) translate(0.5rem, 0.5rem);
-        }
-
-        nav.nav-active .hamburger span:nth-child(2) {
-            opacity: 0;
-        }
-
-        nav.nav-active .hamburger span:nth-child(3) {
-            transform: rotate(-45deg) translate(0.5rem, -0.5rem);
-        }
-        /* End Hamburger Menu Styles */
     </style>
 
     <script>
@@ -333,42 +223,14 @@
                 window.scrollTo(0, scrollPosition);
             }, 10);
         }
-
-        // Hamburger Menu Toggle
-        document.addEventListener('DOMContentLoaded', () => {
-            const nav = document.querySelector('nav');
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelectorAll('nav ul li a');
-
-            if (hamburger && nav) {
-                hamburger.addEventListener('click', () => {
-                    nav.classList.toggle('nav-active');
-                    const isExpanded = nav.classList.contains('nav-active');
-                    hamburger.setAttribute('aria-expanded', isExpanded);
-                });
-            }
-
-            // Close menu when a link is clicked
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (nav.classList.contains('nav-active')) {
-                        nav.classList.remove('nav-active');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                    }
-                });
-            });
-        });
     </script>
 </head>
 <body>
-    
+    <header>
+        <h1>Welcome to My Portfolio</h1>
+    </header>
 
     <nav>
-        <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
         <ul>
             <li><a href="#about">About Me</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -381,10 +243,6 @@
         </ul>
     </nav>
 
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-    </header>
-    
     <section id="about">
         <div class="container">
             <h2>About Me</h2>
