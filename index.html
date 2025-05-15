@@ -149,14 +149,54 @@
             font-size: 1rem;
         }
         @media (max-width: 768px) {
+            header {
+                padding: 3rem 1rem;
+            }
             header h1 {
                 font-size: 2.5rem;
             }
             header p {
                 font-size: 1.2rem;
             }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
             nav ul li {
-                margin: 0 0.8rem;
+                margin: 0.8rem 0;
+            }
+            section {
+                padding: 2rem 1rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .project-card, .event-card {
+                width: 90% !important;
+                margin-right: 0 !important;
+                margin-left: 0 !important;
+                margin-bottom: 1.5rem;
+            }
+            .skills-icons img {
+                height: 80px;
+                margin: 10px;
+            }
+            .cert-icons img {
+                height: 100px;
+                margin: 15px;
+            }
+            dialog {
+                max-width: 90%;
+                max-height: 90%;
+                padding: 1.5rem;
+            }
+            .close-btn {
+                top: 10px;
+                right: 15px;
+                font-size: 24px;
             }
         }
         dialog::backdrop {
