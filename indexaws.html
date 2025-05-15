@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - AWS Inspired</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a73e8, #4285f4);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0 0 1rem;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .hero .cta-buttons a {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+        .cta-primary {
+            background: #ff9900;
+        }
+        .cta-primary:hover {
+            background: #cc7a00;
+        }
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+        .cta-secondary:hover {
+            background: white;
+            color: #1a73e8;
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .section h2 {
+            font-size: 2rem;
+            color: #1a202c;
+        }
+        .section p {
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+        .section-alt {
+            background-color: #f5f5f5;
+        }
+        
+        /* Skills and Certifications */
+        .cards-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            overflow-x: auto;
+        }
+        .card {
+            background: linear-gradient(45deg, #44ff00, #281ae8);
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 2700px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: border 0.3s ease;
+        }
+        .card:hover {
+            border: 20px;
+            border-radius: 50px;
+            border-image-source: linear-gradient(45deg, #ff9900, #1a73e8);
+            border-image-slice: 1;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .card img {
+            width: 70%;
+            height: auto;
+            border-radius: 6px;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a202c;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        footer p {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to My Portfolio</h1>
+        <p>Pursuing a B.Tech in Computer Science and Engineering with a major in Artificial Intelligence and Machine Learning.</p>
+        <div class="cta-buttons">
+            <a href="#about" class="cta-primary">Learn More</a>
+            <a href="#contact" class="cta-secondary">Contact Me</a>
+        </div>
+    </div>
+    
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>
+            Hi, I'm <span style="color:#ff9900">Dharmay</span>. Passionate about technology, programming, and cloud innovations, I aim to contribute impactful solutions in the tech world.
+        </p>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="section section-alt">
+        <h2>Skills</h2>
+        <div class="cards-container">
+            <div class="card">
+                <h3>Programming Languages</h3>
+                <div>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                </div>
+            </div>
+            <div class="card">
+                <h3>Web Development</h3>
+                <div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png" alt="HTML">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1452px-CSS3_logo_and_wordmark.svg.png" alt="CSS">
+                </div>
+            </div>
+            <div class="card">
+                <h3>Database Management</h3>
+                <div>
+                    <img src="https://1000logos.net/wp-content/uploads/2020/08/MySQL-Logo.png" alt="MySQL">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Certifications Section -->
+    <section id="certifications" class="section">
+        <h2>Certifications</h2>
+        <div class="cards-container">
+            <div class="card">
+                <h3>AWS Certifications</h3>
+                <div>
+                    <img src="CLF C02 Badge.png" alt="AWS Cloud Practitioner">
+                    <img src="aws-academy-graduate-aws-academy-cloud-architecting.png" alt="AWS Architecting">
+                    <img src="aws-academy-graduate-aws-academy-cloud-developing.png" alt="AWS Developing">
+                </div>
+            </div>
+            <div class="card">
+                <h3>Other Certifications</h3>
+                <div>
+                    <img src="aws-academy-graduate-aws-academy-machine-learning-foundations.png" alt="AWS Machine Learning Foundations">
+                    <img src="Badge.png" alt="Other Badge">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2>Contact Me</h2>
+        <p>Feel free to reach out to me on LinkedIn for any inquiries, collaborations, or discussions.</p>
+        <a href="https://www.linkedin.com/in/dharmay-shah-145b2217b/" target="_blank">
+            <img src="LinkedInLogo.png" alt="LinkedIn Logo" style="width: 60px; height: 60px; border-radius: 50%;">
+        </a>
+        <p>Let's connect and explore opportunities!</p>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 My Portfolio</p>
+    </footer>
+</body>
+</html>

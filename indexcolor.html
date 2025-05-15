@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #181818;  /* Darker but easier on the eyes */
+            color: #E0E0E0;  /* Softer white text for better readability */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        h2, h3 {
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .project-card {
+            background: #252525;  /* Better contrast */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #2575fc; /* Subtle blue border */
+            flex: 1;
+            min-width: 300px;
+            max-width: 30%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(255, 77, 166, 0.3);
+        }
+
+        h3 {
+            color: #ff4da6; /* Softer neon pink */
+        }
+
+        button, .close-btn {
+            background: #ff4da6;
+            color: #181818;
+            border: none;
+            padding: 10px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover, .close-btn:hover {
+            background: #ff8800; /* Contrast with orange on hover */
+        }
+
+        dialog {
+            background: #1e1e1e;
+            color: #E0E0E0;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #2575fc;
+            box-shadow: 0 4px 15px rgba(255, 77, 166, 0.5);
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .project-card {
+                width: 100% !important;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="projects">
+        <div class="container">
+            <h2 style="width: 100%;">Projects</h2>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                <!-- Fixed Deposit Management System -->
+                <div class="project-card" onclick="openDialog('fd-dialog')">
+                    <h3>Fixed Deposit Management System (C)</h3>
+                    <p>A system for managing fixed deposits, calculating interest, and handling renewals.</p>
+                </div>
+                
+                <!-- Loan Management System -->
+                <div class="project-card" onclick="openDialog('loan-dialog')">
+                    <h3>Loan Management System with Moratorium (C)</h3>
+                    <p>Calculates EMI, adjusts tenure for moratorium, and supports different repayment methods.</p>
+                </div>
+                
+                <!-- WhatsApp GIF Sender -->
+                <div class="project-card" onclick="openDialog('gif-dialog')">
+                    <h3>Automated WhatsApp GIF Sender (Python & Selenium)</h3>
+                    <p>A bot that automates GIF sending to WhatsApp groups using Selenium WebDriver.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fixed Deposit Management System Dialog -->
+    <dialog id="fd-dialog">
+        <span class="close-btn" onclick="closeDialog('fd-dialog')">&times;</span>
+        <h3>Fixed Deposit Management System (C)</h3>
+        <p>This project enables users to manage fixed deposits, calculate maturity values, and handle reinvestments based on custom interest rate rules.</p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>Interest Calculation:</strong> Supports multiple compounding methods.</li>
+            <li><strong>TDS Deduction:</strong> Calculates tax on interest earnings.</li>
+            <li><strong>Renewal Options:</strong> Allows reinvesting principal and interest.</li>
+            <li><strong>Secure Login:</strong> User authentication for account safety.</li>
+        </ul>
+    </dialog>
+
+    <!-- Loan Management System Dialog -->
+    <dialog id="loan-dialog">
+        <span class="close-btn" onclick="closeDialog('loan-dialog')">&times;</span>
+        <h3>Loan Management System with Moratorium (C)</h3>
+        <p>A robust loan management system that calculates EMI and adjusts repayment schedules after a moratorium period.</p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>EMI Calculation:</strong> Supports flat rate and reducing balance methods.</li>
+            <li><strong>Moratorium Period Handling:</strong> Adjusts tenure and outstanding balance accordingly.</li>
+            <li><strong>Flexible Repayment:</strong> Allows users to choose between different interest calculation methods.</li>
+            <li><strong>Loan Maturity Calculation:</strong> Computes final repayment date and amount.</li>
+        </ul>
+    </dialog>
+
+    <!-- WhatsApp GIF Sender Dialog -->
+    <dialog id="gif-dialog">
+        <span class="close-btn" onclick="closeDialog('gif-dialog')">&times;</span>
+        <h3>Automated WhatsApp GIF Sender (Python & Selenium)</h3>
+        <p>A bot that automates sending GIFs to a WhatsApp group using Selenium WebDriver.</p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>Automated GIF Sending:</strong> Uses Selenium to interact with WhatsApp Web.</li>
+            <li><strong>Group Chat Selection:</strong> Searches and selects a group before sending GIFs.</li>
+            <li><strong>Keyword-Based GIF Search:</strong> Finds and sends GIFs based on user-defined keywords.</li>
+            <li><strong>Looped Execution:</strong> Sends multiple GIFs with customizable intervals.</li>
+        </ul>
+    </dialog>
+
+    <script>
+        function openDialog(id) {
+            document.getElementById(id).showModal();
+        }
+        function closeDialog(id) {
+            document.getElementById(id).close();
+        }
+    </script>
+
+</body>
+</html>

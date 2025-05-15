@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(to right, #ff0095, #2575fc);
+            color: white;
+            padding: 5rem;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        header h1 {
+            font-size: 6rem;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #1c1c1c;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+            margin: 0;
+            list-style: none;
+        }
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #ff0095;
+        }
+        section {
+            padding: 4rem 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        section:nth-child(odd) {
+            background: #1c1c1c;
+        }
+        section:nth-child(even) {
+            background: #2c2c2c;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        a {
+            font-size: 1.2rem;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .highlight {
+            color: rgb(0, 0, 0);
+            background: #ffffff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .cert-icons img {
+            height: 190px;
+            margin: 20px;
+            vertical-align: middle;
+        }
+        .skills-icons img {
+            height: 140px;
+            margin: 20px;
+            vertical-align: middle;
+        }
+        .button {
+            font-family: 'Poppins', sans-serif;
+            margin-top: 2rem;
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            color: white;
+            background: #ffffff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .button:hover {
+            background: #6200ee;
+            transform: scale(1.1);
+        }
+        
+        .event-card {
+            background: #494949; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); 
+            text-align: left; 
+            width: 100%; 
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 166, 255, 0.3);
+        }
+        footer {
+            background: #1c1c1c;
+            color: #e0e0e0;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        footer p {
+            font-size: 1rem;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            header p {
+                font-size: 1.2rem;
+            }
+            nav ul li {
+                margin: 0 0.8rem;
+            }
+        }
+        dialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        dialog {
+            box-shadow: 0 4px 15px rgba(255, 0, 149, 0.5);
+        }
+
+        .project-card {
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(255, 0, 149, 0.3);
+
+        }
+
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #ff0095;
+        }
+
+        @media (max-width: 768px) {
+            .project-card {
+                width: 100% !important;
+                margin-right: 0 !important;
+            }
+        }
+    </style>
+
+    <script>
+        // Store the scroll position
+        let scrollPosition = 0;
+        
+        // Open dialog and save scroll position
+        function openDialog(dialogId) {
+            scrollPosition = window.scrollY;
+            document.getElementById(dialogId).showModal();
+        }
+        
+        // Close dialog and restore scroll position
+        function closeDialog(dialogId) {
+            document.getElementById(dialogId).close();
+            setTimeout(() => {
+                window.scrollTo(0, scrollPosition);
+            }, 10);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Portfolio</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#advancing-expertise">Advancing Expertise</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <img src="LinkedIn.png" alt="Your Photo" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-bottom: 20px;">
+            <p>Hi, I'm <span class="highlight">Dharmay</span></p>
+            <p>I am pursuing a B.Tech in</p>
+            <p><span class="highlight">Computer Science and Engineering, Major in Artificial Intelligence and Machine Learning</span></p>
+            <p>at</p>
+            <a href="https://www.adaniuni.ac.in/"><span class="highlight">Adani University</span></a>
+            <p> Passionate about pursuing excellence and embracing the journey. I believe in transforming passion into profession because passion is oxygen to soul.</p>
+            
+            <h3 style="color: #ff0095; margin-top: 20px;">Community Engagement</h3>
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px;"> <strong>Captain</strong> of <span class="highlight"> AWS Cloud Club at Adani University</span></li>
+                <li> <strong>Member</strong> of <span class="highlight">AWS UG Ahmedabad</span></li>
+            </ul>
+        </div>
+    </section>
+
+
+
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <p>Proficient in:</p>
+            <div class="skills-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                <img src="https://1000logos.net/wp-content/uploads/2020/08/MySQL-Logo.png" alt="MySQL">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png" alt="HTML">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1452px-CSS3_logo_and_wordmark.svg.png" alt="CSS">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript">
+                <img src="image-removebg-preview.png" alt="Node">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/640px-React-icon.svg.png" alt="React">
+            </div>
+            <p>Adept in <span class="highlight">Data Structures</span> and <span class="highlight">Algorithm Design</span></p>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <h2>Certifications</h2>
+            <p>Achievements include:</p>
+            <div class="cert-icons">
+                <img src="Badge.png">
+                <img src="CLF C02 Badge.png">
+                <img src="aws-academy-graduate-aws-academy-machine-learning-foundations.png">
+                <img src="aws-academy-graduate-aws-academy-cloud-architecting.png">
+                <img src="aws-academy-graduate-aws-academy-cloud-developing.png">
+            </div>
+            <p>Currently pursuing:</p>
+            <p><span class="highlight">AWS Certified Solutions Architect - Associate</span></p>
+            <p><span class="highlight">AWS Certified Developer - Associate</span></p>
+        </div>
+    </section>
+
+    
+
+    <section id="projects">
+        <div class="container">
+            <h2 style="width: 100%;">Projects</h2>
+            
+            <div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <!-- Fixed Deposit Management System -->
+                <div class="project-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="openDialog('fd-dialog')">
+                    <h3 style="color: #ff0095;">Fixed Deposit Management System with TDS Deduction</h3>
+                    <p>A system for managing fixed deposits, calculating interest, and handling renewals.</p>
+                </div>
+                
+                <!-- Loan Management System -->
+                <div class="project-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="openDialog('loan-dialog')">
+                    <h3 style="color: #ff0095;">Loan Management System with Moratorium</h3>
+                    <p>Calculates EMI, adjusts tenure for moratorium, and supports different repayment methods.</p>
+                </div>
+
+                <!-- WhatsApp GIF Sender -->
+                <div class="project-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="openDialog('gif-dialog')">
+                    <h3 style="color: #ff0095;">Automated WhatsApp GIF Sender (Fun Project)</h3>
+                    <p>A bot that automates GIF sending to WhatsApp groups using Selenium WebDriver.</p>
+                </div>
+                    
+                <!-- IoT Project Card -->
+                <div class="project-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="openDialog('iot-dialog')">
+                    <h3 style="color: #ff0095;">IoT-Based Energy & Flow Monitoring with AWS</h3>
+                    <p>Real-time monitoring system for energy and fluid consumption using IoT and AWS services.</p>
+                </div>
+                
+                <!-- Timetable Project Card -->
+                <div class="project-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="openDialog('timetable-dialog')">
+                    <h3 style="color: #ff0095;">Comprehensive College Timetable Management & Scheduling System</h3>
+                    <p>A fully integrated system that combines faculty, course, and class management with an intelligent Java-based scheduling engine.</p>
+                </div>
+
+                <!-- MindMosaic Project Card -->
+                <div class="project-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="openDialog('mindmosaic-dialog')">
+                    <h3 style="color: #ff0095;">MindMosaic - AI-Powered Mental Wellness App</h3>
+                    <p>An innovative mental wellness application that uses AI to provide personalized insights and recommendations for emotional well-being.</p>
+                </div>
+
+                <!-- College Library Management System -->
+                <div class="project-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="openDialog('library-dialog')">
+                    <h3 style="color: #ff0095;">College Library Management System</h3>
+                    <p>A system to manage student book issuance, returns, automated reminders, and late fees. Built with Node.js/Express and React.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="events">
+        <div class="container">
+            <h2 style="width: 100%;">Events</h2>
+            
+            <div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                
+                <!-- Jen Visit Adani University -->
+                <div class="event-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="window.open('https://www.linkedin.com/posts/dharmay-shah-145b2217b_awscommunity-cloudcomputing-leadership-activity-7245060293679104000-WUYg?utm_source=share&utm_medium=member_desktop&rcm=ACoAACqz5EUBd99tAzWmGmKhZhgcB0-zurfBlPk', '_blank')">
+                    <h3 style="color: #25c3fc;">Jen Looper visits Adani University</h3>
+                    <p>Hosted Jen Looper and Nilesh Vaghela, gaining insights into AWS Leadership Principles, cloud adoption in industries, and strategies for building a thriving AWS Cloud Club.</p>
+                </div>
+                
+                <!-- ASCDC -->
+                <div class="event-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="window.open('https://www.linkedin.com/posts/dharmay-shah-145b2217b_i-struck-an-ultimate-jackpot-a-wealth-of-activity-7245516438289977345-d_hO?utm_source=share&utm_medium=member_desktop&rcm=ACoAACqz5EUBd99tAzWmGmKhZhgcB0-zurfBlPk')">
+                    <h3 style="color: #25c3fc;">AWS Student Community Day CHARUSAT 2024</h3>
+                    <p>Gained invaluable insights from AWS experts on personal branding, AI, cloud security, and architecture best practices, while engaging with industry leaders and innovative tech demonstrations.</p>
+                </div>
+                
+                <!-- ACDV -->
+                <div class="event-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="window.open('https://www.linkedin.com/posts/dharmay-shah-145b2217b_key-take-aways-activity-7253868922343477249-W7nm?utm_source=share&utm_medium=member_desktop&rcm=ACoAACqz5EUBd99tAzWmGmKhZhgcB0-zurfBlPk')">
+                    <h3 style="color: #25c3fc;">AWS Community Day Vadodara 2024</h3>
+                    <p>A power-packed day of learning, networking, and hands-on insights into AWS technologies, covering GenAI, serverless architectures, AWS Amplify, and security best practices.</p>
+                </div>
+
+                <!-- ACDA -->
+                <div class="event-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="window.open('https://www.linkedin.com/posts/dharmay-shah-145b2217b_awsugahm-awsusergroup-awscommunityday-activity-7294471999714725889-q5KU?utm_source=share&utm_medium=member_desktop&rcm=ACoAACqz5EUBd99tAzWmGmKhZhgcB0-zurfBlPk')">
+                    <h3 style="color: #25c3fc;">AWS Community Day Ahmedabad 2025</h3>
+                    <p> Volunteered at the Builder Fair IIoT Tech-Booth, showcasing an innovative project on Remote Energy and Flow Monitering System, engaging visitors with real-world applications of Industrial IoT.</p>
+                </div>
+
+                <!-- HackSpire 2025 -->
+                <div class="event-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="window.open('https://www.linkedin.com/posts/dharmay-shah-145b2217b_hackspire-2025-had-an-amazing-experience-activity-7324369373408702464-mLlJ?utm_source=share&utm_medium=member_desktop&rcm=ACoAACqz5EUBd99tAzWmGmKhZhgcB0-zurfBlPk')">
+                    <h3 style="color: #25c3fc;">HackSpire 2025 - 24-Hour Hackathon</h3>
+                    <p>Led team 'Imposters' in developing MindMosaic, an AI-powered mental wellness app, learning valuable lessons in team collaboration, strategic planning, and project execution under the guidance of ASPDC mentors.</p>
+                </div>
+
+                <!-- The Advancement of Gen AI -->
+                <div class="event-card" style="cursor: pointer; flex: 1; min-width: 300px; max-width: 45%;" onclick="window.open('https://www.linkedin.com/posts/dharmay-shah-145b2217b_the-advancement-of-gen-ai-activity-7327678967174336512-wFH0?utm_source=share&utm_medium=member_desktop&rcm=ACoAACqz5EUBd99tAzWmGmKhZhgcB0-zurfBlPk')">
+                    <h3 style="color: #25c3fc;">The Advancement of Gen AI</h3>
+                    <p>Gained practical insights into building voice-based AI assistants using AWS services, customizing foundation models through fine-tuning, RAG, and agents, and deploying Agentic AI for real-world task automation, decision-making, and workflow orchestration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="research">
+        <div class="container">
+            <h2>Research</h2>
+            <p>Focused on:</p>
+            <p><span class="highlight">AI Based Energy Efficient and Placement Optimized Algorithms for Next-Generation Wireless Technology</span></p>
+            <p><span class="highlight">Impact of Data Quality on Machine Learning Model Training.</span></p>
+        </div>
+    </section>
+
+    <section id="advancing-expertise">
+        <div class="container">
+            <h2>Advancing Expertise</h2>
+            <p>Through continuous learning and hands-on experience, I am deepening my knowledge in the fields of:</p>
+            <p><span class="highlight">Development Technologies</span>  <span class="highlight">Cloud Computing</span>  <span class="highlight">Networking</span>  <span class="highlight">Artificial Intelligence</span></p>
+            <p>My aim is to bridge these technologies to develop innovative solutions for real-world challenges.</p>
+        </div>
+    </section>
+
+    
+    
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>Feel free to reach out to me on LinkedIn for any inquiries, collaborations or discussions.</p>
+            <a href="https://www.linkedin.com/in/dharmay-shah-145b2217b/" target="_blank">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAllBMVEUMZMX///8AYcQAWcFDf8nL3PIAWrzQ3vMAYcI0eclZjtAucslAgsz6/v3x9/sgbclOhM8AX8QAYsAAX70AV70AWMLm7vgAXb4sdsw5fsoRbsVmltK6z+iUt+AMZcGDrN3c6fNvnddiltWqwuPA0+r0+vyOrt+lweR9pduuyueUst9Lh81pldd1mtYdbcunxOXO4u7Z4fGRyVlRAAAEKUlEQVR4nO3ce1faMBzG8SblEpSCiUUuQrkMhsCc+v7f3Ko4KjW/yLY0WXOez9mf4Ml3vSW1NYoAAAAAAAAAAAAAAAAAAAAAAAAAAADgYiriIsqU72FURcapGnXHk5aMue+xVCCT6n56x960Z2OpMt8jsozz+Xve0Xqc+h6SXbKzYOeSfex7UBap+J591lThHI3awPxw5KGcVFUj0RayaRrI6UaUj8GTpfA9NivknApkvTC2YdwjC9lc+h6dBWpFB7JFCIXx1FDIRr6HZ0Fq2EkZewjgXNMnLhVH34a+x/fPeMdYOK3/gchvTIFsXf/ZKR+bC+u/DcW1cS/d1f84jFobU+H3ANYXadNU2PU9PAvkd0Ngz/forMgMhU/1P5Xm4h0ZmHQCOAzz68WEPNdsg9iE+ZH4QATeBTApPYqf9PvoKIh99E2qOxQ3jVvf47JHDT5fMl5GAQW+3tNvnF/4N3shwrhJc8Ljw/Q0Q13MJ4GcRc8IORjP99vZfpWlQe2gH3EZx7Gs/4IJAADqQ3DJX/+FM38vqHyKlA5Hhx+Pj49X43468P34CheEiz9Z+pTMlrvFaQ6YbNrblRpKf6vNbHRNKX2yT/kwSVd5XluzGGs//Ew9NfIGS/RYs3X2yUGzp7dpnMYu+zPql1mbp46f+XxeSCkVxrpt8+bmWJgJOTPeYP7m5QkWi4Wye0d94t3m3sNmtFao5OyLvle7zPnRaKlQCb6+IDBfXvddJ1oq5BH5WE7JXd/xwWilUKnJpYGM9a7dPk5mpfCWP18cmO+okdOtaKVwYHxm5ZP1wOWNPBuFneUfBTK2dHkzyEbhwfirco3NxOF+aqPw8rPMbzuHV34bhX+h4e6q6KnQ4ZM6ngrZyNlG9FXo7hfMvgp7zt7o8FXIDq52U2+FznbTKgovmgAsalq4mB0mQqjJYfvler98o6sWhevuYPh2C5jz4WD1ReMPR4soi4W91dmtXy7MK469o7mpvcLn8nRaSWPi9PzH/++FCXvW3LuXpoXxi6MllK1tqHtGLBMd0zccLYNtFR60W8T0wkqv7yTQVuGTfpfLuvRXkms3sxo7hQlx/yy7NayOO3Uq3MXExY148PFY6OZyYafwihqsXNJfGteoMCGXQoYfzxo1KmxSO2kkJvTLcXUq3BreraFnp3UqNLwT3aJPpnUqPNBjTV+CKDScFVv0t+pUaLiytegXq1BoCQoLKNRDYfVQWEChHgqrh8ICCvVQWD0UFlCoh8LqobCAQj0UVg+FBRTqobB6KCygUA+F1UNhAYV6KKweCgso1ENh9VBYQKEeCquHwkKAhe1SIf2UoaFwSP+/dB29FtTvUsbnH+Q3VxTDmxOq+zffskqJiOtFpZda+OV/M6uQKepLof0NWAAAAAAAAAAAAAAAAAAAAAAAAAAAgAr8Aj5RWY0PDbn2AAAAAElFTkSuQmCC" alt="LinkedIn Logo" style="width: 60px; height: 60px; border-radius: 50%; margin-bottom: 1rem;">
+            </a>
+            <p>Let's connect and explore opportunities!</p>
+        </div>
+    </section>
+
+    <!-- Fixed Deposit Management System Dialog -->
+    <dialog id="fd-dialog" style="background: #1c1c1c; color: #ffffff; padding: 2rem; border-radius: 10px; border: 2px solid #ff0095; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative;">
+        <span class="close-btn" onclick="closeDialog('fd-dialog')">&times;</span>
+        <h3 style="color: #ff0095;">Fixed Deposit Management System</h3>
+        <p>This project enables users to manage fixed deposits, calculate maturity values, and handle reinvestments based on custom interest rate rules.</p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>Interest Calculation:</strong> Supports multiple compounding methods.</li>
+            <li><strong>TDS Deduction:</strong> Calculates tax on interest earnings.</li>
+            <li><strong>Renewal Options:</strong> Allows reinvesting principal and interest.</li>
+            <li><strong>Secure Login:</strong> User authentication for account safety.</li>
+        </ul>
+    </dialog>
+
+    <!-- Loan Management System Dialog -->
+    <dialog id="loan-dialog" style="background: #1c1c1c; color: #ffffff; padding: 2rem; border-radius: 10px; border: 2px solid #ff0095; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative;">
+        <span class="close-btn" onclick="closeDialog('loan-dialog')">&times;</span>
+        <h3 style="color: #ff0095;">Loan Management System with Moratorium</h3>
+        <p>A robust loan management system that calculates EMI and adjusts repayment schedules after a moratorium period.</p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>EMI Calculation:</strong> Supports flat rate and reducing balance methods.</li>
+            <li><strong>Moratorium Period Handling:</strong> Adjusts tenure and outstanding balance accordingly.</li>
+            <li><strong>Flexible Repayment:</strong> Allows users to choose between different interest calculation methods.</li>
+            <li><strong>Loan Maturity Calculation:</strong> Computes final repayment date and amount.</li>
+        </ul>
+    </dialog>
+    
+    <!-- IoT Project Dialog -->
+    <dialog id="iot-dialog" style="background: #1c1c1c; color: #ffffff; padding: 2rem; border-radius: 10px; border: 2px solid #ff0095; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative;">
+        <span class="close-btn" onclick="closeDialog('iot-dialog')">&times;</span>
+        <h3 style="color: #ff0095; padding-right: 30px;">IoT-Based Energy & Flow Monitoring with AWS</h3>
+        <img src="DiagramLight.png" style="width:100%; border-radius: 10px; margin: 1rem 0;">
+        <p>This project enables real-time remote monitoring of energy and fluid consumption using IoT and AWS services. It collects data from flow meters and energy meters via RS485, processes it in AWS IoT Core, and visualizes it using AWS IoT SiteWise.</p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>IoT Integration:</strong> Uses RS485-based flow meters and energy meters for data acquisition.</li>
+            <li><strong>AWS IoT Core:</strong> Securely ingests and processes data via MQTT.</li>
+            <li><strong>AWS IoT SiteWise:</strong> Transforms raw data into actionable insights.</li>
+            <li><strong>Data Storage in Amazon S3:</strong> Stores historical data for analytics.</li>
+            <li><strong>Automated Alarms:</strong> AWS IoT Events detects anomalies and triggers alerts.</li>
+            <li><strong>Email Notifications:</strong> Alerts are sent using AWS Lambda and Amazon SES.</li>
+            <li><strong>Scalability:</strong> Cloud-based processing ensures efficiency and reliability.</li>
+        </ul>
+        <h4>Future Work:</h4>
+        <ul>
+            <li><strong>Predictive Analytics with ML:</strong> Forecast energy and fluid consumption trends.</li>
+            <li><strong>Two-Way Pub/Sub Communication:</strong> Implement remote control and device adjustments.</li>
+        </ul>
+    </dialog>
+    
+    <!-- Timetable Project Dialog -->
+    <dialog id="timetable-dialog" style="background: #1c1c1c; color: #ffffff; padding: 2rem; border-radius: 10px; border: 2px solid #ff0095; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative;">
+        <span class="close-btn" onclick="closeDialog('timetable-dialog')">&times;</span>
+        <h3 style="color: #ff0095;">Comprehensive College Timetable Management & Scheduling System</h3>
+        <p>This system seamlessly integrates <strong>manual schedule management</strong> with <strong>automated timetable generation</strong>, ensuring an efficient and conflict-free scheduling process.</p>
+        <h4>🔹 Key Features:</h4>
+        <ul>
+            <li><strong>User-Friendly Interface:</strong> Manage faculty, courses, and classes with a web-based UI.</li>
+            <li><strong>Automated Timetable Generation:</strong> Uses Java-based intelligent scheduling logic.</li>
+            <li><strong>Conflict-Free Scheduling:</strong> Ensures faculty availability, workload balance, and resource optimization.</li>
+            <li><strong>Real-Time Database Integration:</strong> Automatically synchronizes changes between management UI and scheduling engine.</li>
+            <li><strong>Data Export:</strong> Generates separate schedules for each faculty, class, and division.</li>
+        </ul>
+        <h4>🛠️ Technical Stack:</h4>
+        <ul>
+            <li><strong>Backend:</strong> Node.js & Express.js with RESTful API.</li>
+            <li><strong>Scheduler:</strong> Java-based engine with HashMaps, Lists, and SQL integration.</li>
+            <li><strong>Database:</strong> MySQL/PostgreSQL for persistent data storage.</li>
+            <li><strong>Frontend:</strong> React.js </li>
+        </ul>
+        <h4>🎯 Why It Stands Out?</h4>
+        <ul>
+            <li>Combines <strong>manual management</strong> with <strong>automated scheduling</strong>.</li>
+            <li>Implements <strong>real-world constraints</strong> for accurate timetabling.</li>
+            <li>Ensures <strong>seamless data flow</strong> between frontend, backend, and scheduling engine.</li>
+            <li>Scalable for <strong>multi-department</strong> and <strong>multi-institution</strong> use.</li>
+        </ul>
+    </dialog>
+
+    <!-- WhatsApp GIF Sender Dialog -->
+    <dialog id="gif-dialog" style="background: #1c1c1c; color: #ffffff; padding: 2rem; border-radius: 10px; border: 2px solid #ff0095; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative;">
+        <span class="close-btn" onclick="closeDialog('gif-dialog')">&times;</span>
+        <h3 style="color: #ff0095;">Automated WhatsApp GIF Sender (Fun Project)</h3>
+        <p>A bot that automates sending GIFs to a WhatsApp group using Selenium WebDriver.</p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>Automated GIF Sending:</strong> Uses Selenium to interact with WhatsApp Web.</li>
+            <li><strong>Group Chat Selection:</strong> Searches and selects a group before sending GIFs.</li>
+            <li><strong>Keyword-Based GIF Search:</strong> Finds and sends GIFs based on user-defined keywords.</li>
+            <li><strong>Looped Execution:</strong> Sends multiple GIFs with customizable intervals.</li>
+        </ul>
+    </dialog>
+
+    <!-- MindMosaic Project Dialog -->
+    <dialog id="mindmosaic-dialog" style="background: #1c1c1c; color: #ffffff; padding: 2rem; border-radius: 10px; border: 2px solid #ff0095; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative;">
+        <span class="close-btn" onclick="closeDialog('mindmosaic-dialog')">&times;</span>
+        <h3 style="color: #ff0095;">MindMosaic - AI-Powered Mental Wellness App</h3>
+        <p>Developed during HackSpire 2025, MindMosaic is an innovative mental wellness application that leverages AI to promote emotional well-being through personalized insights and recommendations.</p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>Reflective Onboarding:</strong> Thoughtfully designed questions to understand user's mental wellness baseline</li>
+            <li><strong>ML-Powered Analysis:</strong> Machine learning model trained on synthetic data to generate wellness scores</li>
+            <li><strong>Parameter Weighting:</strong> Sophisticated algorithm assigning weighted relevance to various wellness factors</li>
+            <li><strong>Conversational AI:</strong> Interactive interface for real-time mood assessment</li>
+            <li><strong>Personalized Content:</strong> Tailored recommendations for movies, songs, books, and games based on emotional state</li>
+        </ul>
+        <h4>Technical Implementation:</h4>
+        <ul>
+            <li><strong>AI/ML Integration:</strong> Custom machine learning model for wellness score calculation</li>
+            <li><strong>Data Processing:</strong> Synthetic dataset training with parameter weighting</li>
+            <li><strong>User Interface:</strong> Intuitive design for seamless interaction</li>
+            <li><strong>Privacy-First:</strong> Secure handling of user mental wellness data</li>
+        </ul>
+        <h4>Team Collaboration:</h4>
+        <p>Developed as part of team 'Imposters' with YASH PATEL, Gopal Bhalani, and KAUSHAL VADHER during the 24-hour HackSpire 2025 hackathon at Adani University.</p>
+    </dialog>
+
+    <!-- College Library Management System Dialog -->
+    <dialog id="library-dialog" style="background: #1c1c1c; color: #ffffff; padding: 2rem; border-radius: 10px; border: 2px solid #ff0095; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative;">
+        <span class="close-btn" onclick="closeDialog('library-dialog')">&times;</span>
+        <h3 style="color: #ff0095;">College Library Management System</h3>
+        <p>The College Library Management System is a full-stack application aimed at streamlining library operations within an educational institution.</p>
+        <h4>Key Features:</h4>
+        <ul>
+            <li><strong>Student and Book Management:</strong> Unique IDs for students and books. Comprehensive inventory categorized by curriculum (e.g., Computer Science, AI/ML, Mechanical Engineering, Electrical Engineering, programming languages, cloud, DevOps).</li>
+            <li><strong>Issuance and Return Tracking:</strong> Manages the process of students borrowing and returning books.</li>
+            <li><strong>Automated Notifications:</strong> Sends email reminders to students a day before their book return due date.</li>
+            <li><strong>Fine Calculation:</strong> Imposes charges for late returns.</li>
+            <li><strong>Block Mechanism:</strong> Prevents students with overdue books or unrecorded returns from issuing new books.</li>
+            <li><strong>Database:</strong> SQL database for students, books, current loans, and historical records.</li>
+            <li><strong>Technology Stack:</strong> Backend with Node.js and Express; Frontend with React. Includes cron jobs for reminders.</li>
+        </ul>
+    </dialog>
+
+    <footer>
+        <p>&copy; 2024 My Portfolio</p>
+    </footer>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>
