@@ -150,7 +150,7 @@
         }
         @media (max-width: 768px) {
             body {
-                padding-top: 26.8rem;
+                padding-top: 4.5rem;
             }
             header {
                 padding: 3rem 1rem;
@@ -161,12 +161,29 @@
             header p {
                 font-size: 1.2rem;
             }
+            nav {
+                padding: 0.5rem 1rem;
+            }
+            .hamburger {
+                display: flex;
+            }
             nav ul {
+                display: none;
                 flex-direction: column;
-                align-items: center;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: #1c1c1c;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+                padding: 1rem 0;
+            }
+            nav.nav-active ul {
+                display: flex;
             }
             nav ul li {
                 margin: 0.8rem 0;
+                text-align: center;
             }
             section {
                 padding: 2rem 1rem;
@@ -256,6 +273,46 @@
                 margin-right: 0 !important;
             }
         }
+
+        /* Hamburger Menu Styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+            position: absolute;
+            top: 50%;
+            right: 1.5rem;
+            transform: translateY(-50%);
+        }
+
+        .hamburger span {
+            width: 2rem;
+            height: 0.25rem;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s linear;
+        }
+
+        /* Styles for when the mobile menu is active (toggled by JS) */
+        nav.nav-active .hamburger span:nth-child(1) {
+            transform: rotate(45deg) translate(0.5rem, 0.5rem);
+        }
+
+        nav.nav-active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        nav.nav-active .hamburger span:nth-child(3) {
+            transform: rotate(-45deg) translate(0.5rem, -0.5rem);
+        }
+        /* End Hamburger Menu Styles */
     </style>
 
     <script>
@@ -275,6 +332,31 @@
                 window.scrollTo(0, scrollPosition);
             }, 10);
         }
+
+        // Hamburger Menu Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.querySelector('nav');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelectorAll('nav ul li a');
+
+            if (hamburger && nav) {
+                hamburger.addEventListener('click', () => {
+                    nav.classList.toggle('nav-active');
+                    const isExpanded = nav.classList.contains('nav-active');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                });
+            }
+
+            // Close menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (nav.classList.contains('nav-active')) {
+                        nav.classList.remove('nav-active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        });
     </script>
 </head>
 <body>
@@ -283,6 +365,11 @@
     </header>
 
     <nav>
+        <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul>
             <li><a href="#about">About Me</a></li>
             <li><a href="#skills">Skills</a></li>
