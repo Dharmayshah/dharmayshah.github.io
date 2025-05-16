@@ -115,7 +115,7 @@
             display: inline-block;
             padding: 1rem 2rem;
             font-size: 1rem;
-            color: white;
+            color: rgb(0, 0, 0);
             background: #ffffff;
             text-decoration: none;
             border-radius: 10px;
@@ -123,7 +123,8 @@
             transition: background 0.3s ease;
         }
         .button:hover {
-            background: #6200ee;
+            background: linear-gradient(to right, #ff0095, #2575fc);
+            color: rgb(255, 255, 255);
             transform: scale(1.1);
         }
         
@@ -423,13 +424,27 @@
     <section id="contact">
         <div class="container">
             <h2>Contact Me</h2>
-            <p>Feel free to reach out to me on LinkedIn for any inquiries, collaborations or discussions.</p>
-            <a href="https://www.linkedin.com/in/dharmay-shah-145b2217b/" target="_blank">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAllBMVEUMZMX///8AYcQAWcFDf8nL3PIAWrzQ3vMAYcI0eclZjtAucslAgsz6/v3x9/sgbclOhM8AX8QAYsAAX70AV70AWMLm7vgAXb4sdsw5fsoRbsVmltK6z+iUt+AMZcGDrN3c6fNvnddiltWqwuPA0+r0+vyOrt+lweR9pduuyueUst9Lh81pldd1mtYdbcunxOXO4u7Z4fGRyVlRAAAEKUlEQVR4nO3ce1faMBzG8SblEpSCiUUuQrkMhsCc+v7f3Ko4KjW/yLY0WXOez9mf4Ml3vSW1NYoAAAAAAAAAAAAAAAAAAAAAAAAAAADgYiriIsqU72FURcapGnXHk5aMue+xVCCT6n56x960Z2OpMt8jsozz+Xve0Xqc+h6SXbKzYOeSfex7UBap+J591lThHI3awPxw5KGcVFUj0RayaRrI6UaUj8GTpfA9NivknApkvTC2YdwjC9lc+h6dBWpFB7JFCIXx1FDIRr6HZ0Fq2EkZewjgXNMnLhVH34a+x/fPeMdYOK3/gchvTIFsXf/ZKR+bC+u/DcW1cS/d1f84jFobU+H3ANYXadNU2PU9PAvkd0Ngz/forMgMhU/1P5Xm4h0ZmHQCOAzz68WEPNdsg9iE+ZH4QATeBTApPYqf9PvoKIh99E2qOxQ3jVvf47JHDT5fMl5GAQW+3tNvnF/4N3shwrhJc8Ljw/Q0Q13MJ4GcRc8IORjP99vZfpWlQe2gH3EZx7Gs/4IJAADqQ3DJX/+FM38vqHyKlA5Hhx+Pj49X43468P34CheEiz9Z+pTMlrvFaQ6YbNrblRpKf6vNbHRNKX2yT/kwSVd5XluzGGs//Ew9NfIGS/RYs3X2yUGzp7dpnMYu+zPql1mbp46f+XxeSCkVxrpt8+bmWJgJOTPeYP7m5QkWi4Wye0d94t3m3sNmtFao5OyLvle7zPnRaKlQCb6+IDBfXvddJ1oq5BH5WE7JXd/xwWilUKnJpYGM9a7dPk5mpfCWP18cmO+okdOtaKVwYHxm5ZP1wOWNPBuFneUfBTK2dHkzyEbhwfirco3NxOF+aqPw8rPMbzuHV34bhX+h4e6q6KnQ4ZM6ngrZyNlG9FXo7hfMvgp7zt7o8FXIDq52U2+FznbTKgovmgAsalq4mB0mQqjJYfvler98o6sWhevuYPh2C5jz4WD1ReMPR4soi4W91dmtXy7MK469o7mpvcLn8nRaSWPi9PzH/++FCXvW3LuXpoXxi6MllK1tqHtGLBMd0zccLYNtFR60W8T0wkqv7yTQVuGTfpfLuvRXkms3sxo7hQlx/yy7NayOO3Uq3MXExY148PFY6OZyYafwihqsXNJfGteoMCGXQoYfzxo1KmxSO2kkJvTLcXUq3BreraFnp3UqNLwT3aJPpnUqPNBjTV+CKDScFVv0t+pUaLiytegXq1BoCQoLKNRDYfVQWEChHgqrh8ICCvVQWD0UFlCoh8LqobCAQj0UVg+FBRTqobB6KCygUA+F1UNhAYV6KKweCgso1ENh9VBYQKEeCquHwkKAhe1SIf2UoaFwSP+/dB29FtTvUsbnH+Q3VxTDmxOq+zffskqJiOtFpZda+OV/M6uQKepLof0NWAAAAAAAAAAAAAAAAAAAAAAAAAAAgAr8Aj5RWY0PDbn2AAAAAElFTkSuQmCC" alt="LinkedIn Logo" style="width: 60px; height: 60px; border-radius: 50%; margin-bottom: 1rem;">
-            </a>
             <p>Let's connect and explore opportunities!</p>
+
+            <div style="display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem;">
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/dharmay-shah-145b2217b/" target="_blank" title="LinkedIn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" style="width: 80px; height: 80px;">
+                </a>
+
+                <!-- Gmail -->
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dharmayshah46@gmail.com" target="_blank" title="Send Gmail">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/800px-Gmail_icon_%282020%29.svg.png" alt="Gmail" style="width: 80px; height: 60px;">
+                </a>
+
+                <!-- Resume -->
+                <a href="Dharmay_Shah_Resume.pdf" download title="Download Resume">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/024/235/881/small/cv-icon-resume-illustration-sign-user-data-symbol-or-logo-vector.jpg" alt="Download Resume" style="width: 80px; height: 80px;">
+                </a>
+            </div>
         </div>
     </section>
+
 
     <!-- Fixed Deposit Management System Dialog -->
     <dialog id="fd-dialog" style="background: #1c1c1c; color: #ffffff; padding: 2rem; border-radius: 10px; border: 2px solid #ff0095; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative;">
@@ -567,7 +582,7 @@
     </dialog>
 
     <footer>
-        <p>&copy; 2024 My Portfolio</p>
+        <p>&copy; 2025 Dharmay's Portfolio</p>
     </footer>
 
     <script>
