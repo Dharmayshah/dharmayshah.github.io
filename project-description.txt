@@ -1,5 +1,5 @@
 ### **Comprehensive College Timetable Management & Scheduling System**  
-
+ok
 This project is a **fully integrated, standalone system** that combines the **College Timetable Management System (Node.js + Express.js)** with the **Automated Timetable Scheduler (Java-based)** to provide a complete solution for **managing faculty, courses, and classrooms while generating optimized, conflict-free timetables.**  
 
 It offers both a **user-friendly web interface** for managing schedules and an **intelligent scheduling engine** that automates timetable creation based on multiple constraints, ensuring efficiency and accuracy.  
